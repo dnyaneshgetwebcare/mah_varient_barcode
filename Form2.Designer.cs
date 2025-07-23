@@ -62,29 +62,31 @@
             this.configurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.historyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_part_desc = new System.Windows.Forms.TextBox();
+            this.tb_rev_no = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.vend_code = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.prod_text = new System.Windows.Forms.TextBox();
-            this.error_label = new System.Windows.Forms.Label();
-            this.mm_partcode = new System.Windows.Forms.TextBox();
-            this.txt_desc = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.xButton3 = new TableLayoutPanelSample.XButton();
             this.xButton2 = new TableLayoutPanelSample.XButton();
             this.xButton1 = new TableLayoutPanelSample.XButton();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.prod_text = new System.Windows.Forms.TextBox();
             this.xButton4 = new TableLayoutPanelSample.XButton();
+            this.error_label = new System.Windows.Forms.Label();
+            this.mm_partcode = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.tb_other_code = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.shift_info = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.portSettingBindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataReaderDataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.portSettingBindingSource3)).BeginInit();
@@ -379,13 +381,13 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.71794F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.974358F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.58974F));
-            this.tableLayoutPanel4.Controls.Add(this.textBox4, 1, 3);
-            this.tableLayoutPanel4.Controls.Add(this.textBox3, 2, 3);
+            this.tableLayoutPanel4.Controls.Add(this.tb_part_desc, 1, 3);
+            this.tableLayoutPanel4.Controls.Add(this.tb_rev_no, 2, 3);
             this.tableLayoutPanel4.Controls.Add(this.label4, 1, 2);
             this.tableLayoutPanel4.Controls.Add(this.label5, 2, 2);
             this.tableLayoutPanel4.Controls.Add(this.textBox2, 4, 1);
             this.tableLayoutPanel4.Controls.Add(this.label1, 4, 0);
-            this.tableLayoutPanel4.Controls.Add(this.textBox1, 3, 1);
+            this.tableLayoutPanel4.Controls.Add(this.vend_code, 3, 1);
             this.tableLayoutPanel4.Controls.Add(this.label2, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.label13, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.label12, 1, 0);
@@ -394,8 +396,9 @@
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.mm_partcode, 2, 1);
             this.tableLayoutPanel4.Controls.Add(this.comboBox2, 5, 2);
-            this.tableLayoutPanel4.Controls.Add(this.txt_desc, 3, 3);
+            this.tableLayoutPanel4.Controls.Add(this.tb_other_code, 3, 3);
             this.tableLayoutPanel4.Controls.Add(this.label3, 3, 2);
+            this.tableLayoutPanel4.Controls.Add(this.shift_info, 5, 0);
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 111);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 5;
@@ -407,25 +410,25 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(976, 292);
             this.tableLayoutPanel4.TabIndex = 7;
             // 
-            // textBox4
+            // tb_part_desc
             // 
-            this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tb_part_desc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(106, 137);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(223, 26);
-            this.textBox4.TabIndex = 29;
+            this.tb_part_desc.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_part_desc.Location = new System.Drawing.Point(106, 137);
+            this.tb_part_desc.Name = "tb_part_desc";
+            this.tb_part_desc.Size = new System.Drawing.Size(223, 26);
+            this.tb_part_desc.TabIndex = 29;
             // 
-            // textBox3
+            // tb_rev_no
             // 
-            this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tb_rev_no.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(335, 137);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(215, 26);
-            this.textBox3.TabIndex = 28;
+            this.tb_rev_no.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_rev_no.Location = new System.Drawing.Point(335, 137);
+            this.tb_rev_no.Name = "tb_rev_no";
+            this.tb_rev_no.Size = new System.Drawing.Size(215, 26);
+            this.tb_rev_no.TabIndex = 28;
             // 
             // label4
             // 
@@ -436,9 +439,9 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(106, 118);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 16);
+            this.label4.Size = new System.Drawing.Size(76, 16);
             this.label4.TabIndex = 25;
-            this.label4.Text = "VAIPL Code";
+            this.label4.Text = "Part Desc";
             // 
             // label5
             // 
@@ -478,15 +481,15 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Count";
             // 
-            // textBox1
+            // vend_code
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.vend_code.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(556, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(235, 26);
-            this.textBox1.TabIndex = 23;
+            this.vend_code.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.vend_code.Location = new System.Drawing.Point(556, 39);
+            this.vend_code.Name = "vend_code";
+            this.vend_code.Size = new System.Drawing.Size(235, 26);
+            this.vend_code.TabIndex = 23;
             // 
             // label2
             // 
@@ -501,20 +504,6 @@
             this.label2.TabIndex = 22;
             this.label2.Text = "Vendor code";
             this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.Enabled = false;
-            this.comboBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(865, 98);
-            this.comboBox2.MaxLength = 15;
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(108, 26);
-            this.comboBox2.TabIndex = 18;
             // 
             // label13
             // 
@@ -539,9 +528,9 @@
             this.label12.ForeColor = System.Drawing.Color.White;
             this.label12.Location = new System.Drawing.Point(106, 20);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(102, 16);
+            this.label12.Size = new System.Drawing.Size(80, 16);
             this.label12.TabIndex = 15;
-            this.label12.Text = "Product Code";
+            this.label12.Text = "Product ID";
             // 
             // tableLayoutPanel1
             // 
@@ -561,102 +550,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(530, 118);
             this.tableLayoutPanel1.TabIndex = 24;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.comboBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 39);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(97, 26);
-            this.comboBox1.TabIndex = 17;
-            this.comboBox1.Visible = false;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyUp);
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel5.ColumnCount = 2;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.Controls.Add(this.prod_text, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.xButton4, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.error_label, 0, 1);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(106, 39);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 2;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(223, 53);
-            this.tableLayoutPanel5.TabIndex = 30;
-            // 
-            // prod_text
-            // 
-            this.prod_text.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prod_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.prod_text.Location = new System.Drawing.Point(3, 3);
-            this.prod_text.Name = "prod_text";
-            this.prod_text.Size = new System.Drawing.Size(172, 26);
-            this.prod_text.TabIndex = 0;
-            this.prod_text.TextChanged += new System.EventHandler(this.prod_text_TextChanged);
-            this.prod_text.Enter += new System.EventHandler(this.prod_text_Enter);
-            this.prod_text.KeyDown += new System.Windows.Forms.KeyEventHandler(this.prod_text_KeyDown);
-            this.prod_text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.prod_text_KeyPress);
-            this.prod_text.KeyUp += new System.Windows.Forms.KeyEventHandler(this.prod_text_KeyUp);
-            this.prod_text.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.prod_text_PreviewKeyDown);
-            this.prod_text.Validated += new System.EventHandler(this.prod_text_Validated);
-            // 
-            // error_label
-            // 
-            this.error_label.AutoSize = true;
-            this.error_label.BackColor = System.Drawing.Color.Yellow;
-            this.error_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.error_label.ForeColor = System.Drawing.Color.Red;
-            this.error_label.Location = new System.Drawing.Point(3, 26);
-            this.error_label.Name = "error_label";
-            this.error_label.Size = new System.Drawing.Size(0, 16);
-            this.error_label.TabIndex = 2;
-            // 
-            // mm_partcode
-            // 
-            this.mm_partcode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mm_partcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mm_partcode.Location = new System.Drawing.Point(335, 39);
-            this.mm_partcode.Name = "mm_partcode";
-            this.mm_partcode.Size = new System.Drawing.Size(215, 26);
-            this.mm_partcode.TabIndex = 31;
-            // 
-            // txt_desc
-            // 
-            this.txt_desc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_desc.Location = new System.Drawing.Point(556, 137);
-            this.txt_desc.Name = "txt_desc";
-            this.txt_desc.Size = new System.Drawing.Size(235, 26);
-            this.txt_desc.TabIndex = 32;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(556, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Desc";
             // 
             // xButton3
             // 
@@ -748,6 +641,57 @@
             this.xButton1.UseVisualStyleBackColor = true;
             this.xButton1.Click += new System.EventHandler(this.bt_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.comboBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(3, 39);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(97, 26);
+            this.comboBox1.TabIndex = 17;
+            this.comboBox1.Visible = false;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBox1_KeyUp);
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel5.ColumnCount = 2;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel5.Controls.Add(this.prod_text, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.xButton4, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.error_label, 0, 1);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(106, 39);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 2;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(223, 53);
+            this.tableLayoutPanel5.TabIndex = 30;
+            // 
+            // prod_text
+            // 
+            this.prod_text.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prod_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prod_text.Location = new System.Drawing.Point(3, 3);
+            this.prod_text.Name = "prod_text";
+            this.prod_text.Size = new System.Drawing.Size(172, 26);
+            this.prod_text.TabIndex = 0;
+            this.prod_text.TextChanged += new System.EventHandler(this.prod_text_TextChanged);
+            this.prod_text.Enter += new System.EventHandler(this.prod_text_Enter);
+            this.prod_text.KeyDown += new System.Windows.Forms.KeyEventHandler(this.prod_text_KeyDown);
+            this.prod_text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.prod_text_KeyPress);
+            this.prod_text.KeyUp += new System.Windows.Forms.KeyEventHandler(this.prod_text_KeyUp);
+            this.prod_text.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.prod_text_PreviewKeyDown);
+            this.prod_text.Validated += new System.EventHandler(this.prod_text_Validated);
+            // 
             // xButton4
             // 
             this.xButton4.ColorTable = office2010Blue1;
@@ -760,6 +704,86 @@
             this.xButton4.Theme = TableLayoutPanelSample.Theme.MSOffice2010_BLUE;
             this.xButton4.UseVisualStyleBackColor = true;
             this.xButton4.Click += new System.EventHandler(this.xButton4_Click);
+            // 
+            // error_label
+            // 
+            this.error_label.AutoSize = true;
+            this.error_label.BackColor = System.Drawing.Color.Yellow;
+            this.error_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.error_label.ForeColor = System.Drawing.Color.Red;
+            this.error_label.Location = new System.Drawing.Point(3, 26);
+            this.error_label.Name = "error_label";
+            this.error_label.Size = new System.Drawing.Size(0, 16);
+            this.error_label.TabIndex = 2;
+            // 
+            // mm_partcode
+            // 
+            this.mm_partcode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mm_partcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mm_partcode.Location = new System.Drawing.Point(335, 39);
+            this.mm_partcode.Name = "mm_partcode";
+            this.mm_partcode.Size = new System.Drawing.Size(215, 26);
+            this.mm_partcode.TabIndex = 31;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox2.Enabled = false;
+            this.comboBox2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(865, 98);
+            this.comboBox2.MaxLength = 15;
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(108, 26);
+            this.comboBox2.TabIndex = 18;
+            this.comboBox2.Visible = false;
+            // 
+            // tb_other_code
+            // 
+            this.tb_other_code.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_other_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_other_code.Location = new System.Drawing.Point(556, 137);
+            this.tb_other_code.Name = "tb_other_code";
+            this.tb_other_code.Size = new System.Drawing.Size(235, 26);
+            this.tb_other_code.TabIndex = 32;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(556, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 16);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "Other";
+            // 
+            // shift_info
+            // 
+            this.shift_info.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.shift_info.AutoSize = true;
+            this.shift_info.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shift_info.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.shift_info.Location = new System.Drawing.Point(865, 0);
+            this.shift_info.Name = "shift_info";
+            this.shift_info.Size = new System.Drawing.Size(108, 36);
+            this.shift_info.TabIndex = 34;
+            this.shift_info.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 60000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form2
             // 
@@ -844,11 +868,11 @@
         private XButton xButton1;
         private XButton xButton2;
         private XButton xButton3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox vend_code;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tb_part_desc;
+        private System.Windows.Forms.TextBox tb_rev_no;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
@@ -856,7 +880,9 @@
         private XButton xButton4;
         private System.Windows.Forms.Label error_label;
         private System.Windows.Forms.TextBox mm_partcode;
-        private System.Windows.Forms.TextBox txt_desc;
+        private System.Windows.Forms.TextBox tb_other_code;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Label shift_info;
     }
 }

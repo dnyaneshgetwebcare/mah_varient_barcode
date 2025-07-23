@@ -50,7 +50,7 @@ namespace TableLayoutPanelSample
 
         private void xButton2_Click(object sender, EventArgs e)
         {
-            if (!textBox1.Text.Equals("") && !textBox2.Text.Equals(""))
+            if (!part_id.Text.Equals("") && !part_nos.Text.Equals(""))
                 saveData();
             else
                 MessageBox.Show("Product code or Vendor code cannot be blank. ");
@@ -59,7 +59,7 @@ namespace TableLayoutPanelSample
         {
             try
             {
-                String query = "Select * from mahindra_barcode WHERE `product_code`='" + textBox1.Text + "'";
+                String query = "Select * from mahindra_barcode WHERE `product_id`='" + part_id.Text + "'";
                 adapter = new OleDbDataAdapter(query, connection);
                 ds = new DataSet();//student-> table name in stud.accdb file
                 adapter.Fill(ds, "mahindra_barcode");
@@ -70,8 +70,8 @@ namespace TableLayoutPanelSample
                 {
 
                     //MessageBox.Show("Please Enter valid product code. Product code does not exist in system please contact Administration.");
-                    query_insert = "insert into mahindra_barcode(`product_code`,`vendor_code`,`mm_code`,`sl_no`) values('"
-                        + textBox1.Text + "','" + textBox3.Text + "','" + textBox2.Text + "','" + vaipl_part.Text + "')";
+                    query_insert = "insert into mahindra_barcode(`product_id`,`vendor_code`,`mm_part_code`,`part_desc` ,`oth` ,`cust_rev`) values('"
+                        + part_id.Text + "','" + vendor_code.Text + "','" + part_nos.Text + "','" + part_desc.Text + "','"+ other_feild.Text+ "','" + cust_rev.Text + "')";
                     connection.Open();
 
                     OleDbCommand command = new OleDbCommand();
@@ -81,19 +81,19 @@ namespace TableLayoutPanelSample
                     command.ExecuteNonQuery();
                     MessageBox.Show("Data Saved");
                     connection.Close();
-                    textBox1.Text = "";
-                    textBox2.Text = "";
-                    textBox3.Text = "";
-                    vaipl_part.Text = "";
-                    Mf_date_code.Text = "";
-                    sl_no.Text = "";
+                    part_id.Text = "";
+                    part_nos.Text = "";
+                    vendor_code.Text = "";
+                    part_desc.Text = "";
+                   
+                    other_feild.Text = "";
                     cust_rev.Text = "";
                     loadData();
                 }
                 else
                 {
                     MessageBox.Show("Please Enter valid product code. Product code does already exist in system please contact Administration.");
-                    // query_insert = "Update mahindra_barcode set `product_code`='" + textBox1.Text + "',`vendor_code`='" + textBox2.Text + "'";
+                    // query_insert = "Update mahindra_barcode set `product_id`='" + textBox1.Text + "',`vendor_code`='" + textBox2.Text + "'";
                 }
 
 
@@ -108,8 +108,8 @@ namespace TableLayoutPanelSample
         }
         public void loadData()
         {
-            String query = "select id as `Sr no`,product_code as `Product Code`,vendor_code as `Vendor Code`,mm_code as `M&M Part No`," +
-                "serial_no as `Serial No`,cust_rev as `Customer Rev Level` from mahindra_barcode order by id desc";
+            String query = "select id as `Sr no`,product_id as `Product ID`,vendor_code as `Vendor Code`,mm_part_code as `M&M Part No`," +
+                "part_desc as `Part Desc`,cust_rev as `Part Revsion`, oth as `Other` from mahindra_barcode order by id desc";
             adapter = new OleDbDataAdapter(query, connection);
             dt = new DataTable();//student-> table name in stud.accdb file
             adapter.Fill(dt);
@@ -118,7 +118,7 @@ namespace TableLayoutPanelSample
             //dataGridView1.Columns.Add("srn_no", "Sr No");
             //dataGridView1.Columns.Add("date_entry", "Date");
             //dataGridView1.Columns.Add("barcode", "Barcode");
-            //dataGridView1.Columns.Add("product_code", "Product Code");
+            //dataGridView1.Columns.Add("product_id", "Product Code");
             //dataGridView1.Columns.Add("serial_number", "Serial Number");
             //dataGridView1.Columns.Add("vendor_code", "Vendor Code");
 
@@ -162,11 +162,12 @@ namespace TableLayoutPanelSample
             {
                 DataGridViewRow dr = dataGridView1.Rows[dataGridCell.RowIndex];
                 idval = dr.Cells[1].Value.ToString();
-                textBox1.Text = dr.Cells[2].Value.ToString();
-                textBox3.Text = dr.Cells[3].Value.ToString();
-                textBox2.Text = dr.Cells[4].Value.ToString();
-               /* vaipl_part.Text = dr.Cells[5].Value.ToString();
-                cust_rev.Text = dr.Cells[6].Value.ToString();*/
+                part_id.Text = dr.Cells[2].Value.ToString();
+                vendor_code.Text = dr.Cells[3].Value.ToString();
+                part_nos.Text = dr.Cells[4].Value.ToString();
+                part_desc.Text = dr.Cells[5].Value.ToString();
+                cust_rev.Text = dr.Cells[6].Value.ToString();
+                other_feild.Text = dr.Cells[7].Value.ToString();
                 //  Mf_date_code.Text = dr.Cells[7].Value.ToString();
                 //  sl_no.Text = dr.Cells[8].Value.ToString();
                 xButton1.Visible = true;
@@ -180,9 +181,9 @@ namespace TableLayoutPanelSample
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
                 idval = row.Cells[1].Value.ToString();
-                textBox1.Text = row.Cells[2].Value.ToString();
-                textBox2.Text = row.Cells[3].Value.ToString();
-                textBox3.Text = row.Cells[4].Value.ToString();
+                part_id.Text = row.Cells[2].Value.ToString();
+                part_nos.Text = row.Cells[3].Value.ToString();
+                vendor_code.Text = row.Cells[4].Value.ToString();
                /* vaipl_part.Text = row.Cells[5].Value.ToString();
                 cust_rev.Text = row.Cells[6].Value.ToString();*/
                 // Mf_date_code.Text = row.Cells[7].Value.ToString();
@@ -195,21 +196,21 @@ namespace TableLayoutPanelSample
 
         private void xButton1_Click_1(object sender, EventArgs e)
         {
-            if (!textBox1.Text.Equals("") && !textBox2.Text.Equals(""))
+            if (!part_id.Text.Equals("") && !part_nos.Text.Equals(""))
             {
 
 
                 try
                 {
-                    //String query = "Select * from mahindra_barcode WHERE `product_code`='" + textBox1.Text + "'";
+                    //String query = "Select * from mahindra_barcode WHERE `product_id`='" + textBox1.Text + "'";
                     //adapter = new OleDbDataAdapter(query, connection);
                     //ds = new DataSet();//student-> table name in stud.accdb file
                     //adapter.Fill(ds, "mahindra_barcode");
                     //ds.Tables[0].Constraints.Add("pk_sno", ds.Tables[0].Columns[0], true);
                     //int op_count = ds.Tables[0].Rows.Count;
                     String query_insert = "";
-                    query_insert = "Update mahindra_barcode set `product_code`='" + textBox1.Text + "',`vendor_code`='" + textBox3.Text +
-                        "',`mm_code`='" + textBox2.Text + "' where id=" + idval;
+                    query_insert = "Update mahindra_barcode set `product_id`='" + part_id.Text + "',`vendor_code`='" + vendor_code.Text +
+                        "',`mm_part_code`='" + part_nos.Text + "',`part_desc`='" + part_desc.Text + "',`cust_rev`='" + cust_rev.Text + "' ,`oth`='" + other_feild.Text + "' where id=" + idval;
                     connection.Open();
                     OleDbCommand command = new OleDbCommand();
                     command.Connection = connection;
@@ -227,10 +228,11 @@ namespace TableLayoutPanelSample
                 {
                     connection.Close();
                 }
-                textBox1.Text = "";
-                textBox2.Text = "";
-                textBox3.Text = "";
-                vaipl_part.Text = "";
+                part_id.Text = "";
+                part_nos.Text = "";
+                vendor_code.Text = "";
+                part_desc.Text = "";
+                other_feild.Text = "";
                 //Mf_date_code.Text = "";
                 // sl_no.Text = "";
                 cust_rev.Text = "";
@@ -254,7 +256,7 @@ namespace TableLayoutPanelSample
         {
             if (e.KeyCode == Keys.Enter)
             {
-                textBox2.Focus();
+                part_nos.Focus();
             }
         }
 
@@ -262,19 +264,20 @@ namespace TableLayoutPanelSample
         {
             if (e.KeyCode == Keys.Enter)
             {
-                textBox3.Focus();
+                vendor_code.Focus();
             }
         }
 
         private void xButton3_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            vaipl_part.Text = "";
+            part_id.Text = "";
+            part_nos.Text = "";
+            vendor_code.Text = "";
+            part_desc.Text = "";
             // Mf_date_code.Text = "";
             //sl_no.Text = "";
             cust_rev.Text = "";
+            other_feild.Text = "";
             xButton1.Visible = false;
             xButton2.Visible = true;
         }
@@ -291,6 +294,11 @@ namespace TableLayoutPanelSample
         }
 
         private void CreateProduct_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }

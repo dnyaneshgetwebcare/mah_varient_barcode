@@ -35,20 +35,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.cust_rev = new System.Windows.Forms.TextBox();
-            this.sl_no = new System.Windows.Forms.TextBox();
-            this.Mf_date_code = new System.Windows.Forms.TextBox();
-            this.vaipl_part = new System.Windows.Forms.TextBox();
+            this.part_desc = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.part_id = new System.Windows.Forms.TextBox();
+            this.part_nos = new System.Windows.Forms.TextBox();
+            this.vendor_code = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.other_feild = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.xButton2 = new TableLayoutPanelSample.XButton();
             this.xButton1 = new TableLayoutPanelSample.XButton();
             this.xButton3 = new TableLayoutPanelSample.XButton();
@@ -105,19 +103,17 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.741414F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.113589F));
             this.tableLayoutPanel2.Controls.Add(this.cust_rev, 2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.sl_no, 3, 3);
-            this.tableLayoutPanel2.Controls.Add(this.Mf_date_code, 4, 3);
-            this.tableLayoutPanel2.Controls.Add(this.vaipl_part, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.other_feild, 3, 3);
+            this.tableLayoutPanel2.Controls.Add(this.part_desc, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.label7, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.label5, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.label3, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label12, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.dataGridView1, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.label2, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox2, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox3, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.part_id, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.part_nos, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.vendor_code, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.xButton2, 6, 0);
             this.tableLayoutPanel2.Controls.Add(this.xButton1, 6, 1);
             this.tableLayoutPanel2.Controls.Add(this.xButton3, 6, 2);
@@ -143,34 +139,14 @@
             this.cust_rev.Size = new System.Drawing.Size(138, 26);
             this.cust_rev.TabIndex = 34;
             // 
-            // sl_no
+            // part_desc
             // 
-            this.sl_no.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.sl_no.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sl_no.Location = new System.Drawing.Point(492, 91);
-            this.sl_no.Name = "sl_no";
-            this.sl_no.Size = new System.Drawing.Size(206, 26);
-            this.sl_no.TabIndex = 33;
-            this.sl_no.Visible = false;
-            // 
-            // Mf_date_code
-            // 
-            this.Mf_date_code.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.Mf_date_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Mf_date_code.Location = new System.Drawing.Point(716, 91);
-            this.Mf_date_code.Name = "Mf_date_code";
-            this.Mf_date_code.Size = new System.Drawing.Size(65, 26);
-            this.Mf_date_code.TabIndex = 32;
-            this.Mf_date_code.Visible = false;
-            // 
-            // vaipl_part
-            // 
-            this.vaipl_part.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.vaipl_part.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.vaipl_part.Location = new System.Drawing.Point(59, 91);
-            this.vaipl_part.Name = "vaipl_part";
-            this.vaipl_part.Size = new System.Drawing.Size(214, 26);
-            this.vaipl_part.TabIndex = 31;
+            this.part_desc.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.part_desc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.part_desc.Location = new System.Drawing.Point(59, 91);
+            this.part_desc.Name = "part_desc";
+            this.part_desc.Size = new System.Drawing.Size(214, 26);
+            this.part_desc.TabIndex = 31;
             // 
             // label7
             // 
@@ -181,37 +157,9 @@
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(280, 72);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(151, 16);
+            this.label7.Size = new System.Drawing.Size(92, 16);
             this.label7.TabIndex = 30;
-            this.label7.Text = "Rev. Level Customer";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(492, 72);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 16);
-            this.label5.TabIndex = 29;
-            this.label5.Text = "SI. no";
-            this.label5.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(716, 60);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 28);
-            this.label4.TabIndex = 28;
-            this.label4.Text = "Mf. Date &  Code";
-            this.label4.Visible = false;
+            this.label7.Text = "Part Rev No";
             // 
             // label3
             // 
@@ -222,9 +170,10 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(59, 72);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 16);
+            this.label3.Size = new System.Drawing.Size(76, 16);
             this.label3.TabIndex = 27;
-            this.label3.Text = "Serial No";
+            this.label3.Text = "Part Desc";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label12
             // 
@@ -238,19 +187,6 @@
             this.label12.Size = new System.Drawing.Size(96, 16);
             this.label12.TabIndex = 16;
             this.label12.Text = "Part ID Code";
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(280, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 16);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "M&&M Part No";
             // 
             // dataGridView1
             // 
@@ -294,35 +230,70 @@
             this.label2.TabIndex = 25;
             this.label2.Text = "Vendor Code";
             // 
-            // textBox1
+            // part_id
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(59, 33);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(214, 26);
-            this.textBox1.TabIndex = 17;
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            this.part_id.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.part_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.part_id.Location = new System.Drawing.Point(59, 33);
+            this.part_id.Name = "part_id";
+            this.part_id.Size = new System.Drawing.Size(214, 26);
+            this.part_id.TabIndex = 17;
+            this.part_id.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
-            // textBox2
+            // part_nos
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(280, 33);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(201, 26);
-            this.textBox2.TabIndex = 18;
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
+            this.part_nos.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.part_nos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.part_nos.Location = new System.Drawing.Point(280, 33);
+            this.part_nos.Name = "part_nos";
+            this.part_nos.Size = new System.Drawing.Size(201, 26);
+            this.part_nos.TabIndex = 18;
+            this.part_nos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
-            // textBox3
+            // vendor_code
             // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(492, 33);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(195, 26);
-            this.textBox3.TabIndex = 26;
-            this.textBox3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
+            this.vendor_code.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.vendor_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.vendor_code.Location = new System.Drawing.Point(492, 33);
+            this.vendor_code.Name = "vendor_code";
+            this.vendor_code.Size = new System.Drawing.Size(195, 26);
+            this.vendor_code.TabIndex = 26;
+            this.vendor_code.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(280, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 16);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "M&&M Part No";
+            // 
+            // other_feild
+            // 
+            this.other_feild.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.other_feild.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.other_feild.Location = new System.Drawing.Point(492, 91);
+            this.other_feild.Name = "other_feild";
+            this.other_feild.Size = new System.Drawing.Size(206, 26);
+            this.other_feild.TabIndex = 33;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(492, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(45, 16);
+            this.label5.TabIndex = 29;
+            this.label5.Text = "Other";
             // 
             // xButton2
             // 
@@ -436,23 +407,21 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox part_id;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox part_nos;
         private System.Windows.Forms.DataGridView dataGridView1;
         private XButton xButton1;
         private XButton xButton2;
         private XButton xButton3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox vendor_code;
         private System.Windows.Forms.TextBox cust_rev;
-        private System.Windows.Forms.TextBox sl_no;
-        private System.Windows.Forms.TextBox Mf_date_code;
-        private System.Windows.Forms.TextBox vaipl_part;
+        private System.Windows.Forms.TextBox part_desc;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox other_feild;
+        private System.Windows.Forms.Label label5;
     }
 }

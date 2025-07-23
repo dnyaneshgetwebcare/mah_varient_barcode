@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.35931.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableLayoutPanelSample", "TableLayoutPanelSample.csproj", "{3756008F-28DE-44D9-8BA5-1ABA5B7F9864}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Voss3.0", "..\Voss3.0\Voss3.0.vdproj", "{C7E819A8-E7D9-4C94-BD91-B323FAC3EDC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,8 +27,17 @@ Global
 		{3756008F-28DE-44D9-8BA5-1ABA5B7F9864}.Release|Mixed Platforms.Build.0 = Release|x86
 		{3756008F-28DE-44D9-8BA5-1ABA5B7F9864}.Release|x86.ActiveCfg = Release|x86
 		{3756008F-28DE-44D9-8BA5-1ABA5B7F9864}.Release|x86.Build.0 = Release|x86
+		{C7E819A8-E7D9-4C94-BD91-B323FAC3EDC0}.Debug|Any CPU.ActiveCfg = Debug
+		{C7E819A8-E7D9-4C94-BD91-B323FAC3EDC0}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{C7E819A8-E7D9-4C94-BD91-B323FAC3EDC0}.Debug|x86.ActiveCfg = Debug
+		{C7E819A8-E7D9-4C94-BD91-B323FAC3EDC0}.Release|Any CPU.ActiveCfg = Release
+		{C7E819A8-E7D9-4C94-BD91-B323FAC3EDC0}.Release|Mixed Platforms.ActiveCfg = Release
+		{C7E819A8-E7D9-4C94-BD91-B323FAC3EDC0}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1106CDA9-941A-4A6E-88A9-7ABE00E3E61C}
 	EndGlobalSection
 EndGlobal

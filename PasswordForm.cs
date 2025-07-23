@@ -23,7 +23,7 @@ namespace TableLayoutPanelSample
         }
         private void xButton1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.ToString().Equals("Password#2025"))
+            if (textBox1.Text.ToString().Equals("Password#2025"))  //Password#2025
             {
 
                 requestForm.Show();

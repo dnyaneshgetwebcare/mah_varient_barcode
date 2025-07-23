@@ -18,14 +18,24 @@ namespace TableLayoutPanelSample
         bool display_product = false, display_serial = false, display_date = false,
             display_vendor = false, bar_product = false, bar_vendor = false, 
             bar_date = false, bar_serial = false, display_descripton = false,
-            bar_rev_level = false,  display_rev_level = false, display_vailp_rev=false;
+            bar_rev_level = false,  display_rev_level = false, display_shift=false;
         DataSet ds;
         String datefmt, display_date_fmt;
         bool preview_bool = true;
         int serial_nos = 0;
         DataTable dt;
+        String printer_name = "TSC TTP-244 Pro";
         List<String> product_code_list, vendor_code;
         private OleDbConnection connection = new OleDbConnection();
+        TimeSpan shift1Start = new TimeSpan(7, 0, 0);   // 07:00 AM
+        TimeSpan shift1End = new TimeSpan(15, 30, 0);    // 03:00 PM
+
+        TimeSpan shift2Start = new TimeSpan(15, 30, 0);  // 03:00 PM
+        TimeSpan shift2End = new TimeSpan(23, 30, 0);    // 11:00 PM
+
+        // Shift 3 crosses midnight
+        TimeSpan shift3Start = new TimeSpan(23, 30, 0);  // 11:00 PM
+        TimeSpan shift3End = new TimeSpan(7, 0, 0);     // 07:00 AM
         public Form2()
         {
             InitializeComponent();
@@ -33,11 +43,60 @@ namespace TableLayoutPanelSample
             //deleteOldRecords();
             setAutocomplete();
             loadData();
+            setShiftTiming();
+            setSerialNumber();
+        }
 
+        public void setSerialNumber()
+        {
+            String query = "select * from serial_nos";
+
+            adapter = new OleDbDataAdapter(query, connection);
+            dt = new DataTable();//student-> table name in stud.accdb file
+            adapter.Fill(dt);
+            foreach (DataRow dataRow in dt.Rows)
+            {
+                serial_nos = dataRow.Field<Int32>("current_serial_nos");
+            }
+        }
+        public void setShiftTiming()
+        {
+            String query = "select * from shift_details";
+          
+            adapter = new OleDbDataAdapter(query, connection);
+            dt = new DataTable();//student-> table name in stud.accdb file
+            adapter.Fill(dt);
+            foreach (DataRow dataRow in dt.Rows)
+            {
+                TimeSpan shift_starttime_span = getTimeSpan(dataRow.Field<String>("start_time"));
+                TimeSpan shift_endtime_span = getTimeSpan(dataRow.Field<String>("end_time"));
+                switch (dataRow.Field<Int32>("ID"))
+                {
+                    case 2:
+                        shift1Start = shift_starttime_span;
+                        shift1End = shift_endtime_span;
+                        break;
+                    case 3:
+                        shift2Start = shift_starttime_span;
+                        shift2End = shift_endtime_span;
+                        break;
+                    case 4:
+                        shift3Start = shift_starttime_span;
+                        shift3End = shift_endtime_span;
+                        break;
+
+                }
+            }
+        }
+        public TimeSpan getTimeSpan(String time_str)
+        {
+            DateTime timeValue = Convert.ToDateTime(time_str);
+            TimeSpan timeSpan = timeValue.TimeOfDay;
+            return timeSpan;
         }
         public void loadData()
         {
-            String query = "select id as `Sr no`,date_entry as `Date`,time_entry as `Time`,barcode as `Barcode`,product_code as `Product Code`,serial_number as `Serial Number`,vendor_code as `Vendor Code`,descrip as `Description` from report where `date_entry`=#" + DateTime.Now.ToString("dd/MM/yyyy") + "# order by id desc";
+            /*String query = "select id as `Sr no`,date_entry as `Date`,time_entry as `Time`,barcode as `Barcode`,product_id as `Product Code`,serial_number as `Serial Number`,vendor_code as `Vendor Code`,descrip as `Description` from report where `date_entry`=#" + DateTime.Now.ToString("dd/MM/yyyy") + "# order by id desc";
             adapter = new OleDbDataAdapter(query, connection);
             dt = new DataTable();//student-> table name in stud.accdb file
             adapter.Fill(dt);
@@ -48,7 +107,7 @@ namespace TableLayoutPanelSample
             //dataGridView1.Columns.Add("srn_no", "Sr No");
             //dataGridView1.Columns.Add("date_entry", "Date");
             //dataGridView1.Columns.Add("barcode", "Barcode");
-            //dataGridView1.Columns.Add("product_code", "Product Code");
+            //dataGridView1.Columns.Add("product_id", "Product Code");
             //dataGridView1.Columns.Add("serial_number", "Serial Number");
             //dataGridView1.Columns.Add("vendor_code", "Vendor Code");
 
@@ -74,14 +133,14 @@ namespace TableLayoutPanelSample
                 dataGridView1.Columns[j].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             }
-
+*/
             //dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Pink;
 
 
         }
         void bt_Click(object sender, EventArgs e)
         {
-            saveData();
+            SaveData();
             setBarcodeSetting();
             PrintDocument pd = new PrintDocument();
             //Add PrintPage event handler
@@ -103,37 +162,39 @@ namespace TableLayoutPanelSample
                     float size = float.Parse("1.18");
                     size = (size + 0.005f) * 100;
                     //MessageBox.Show(size+"");
-                    if (pd.PrinterSettings.PrinterName.CompareTo("TSC TTP-244 Pro") == 0)
-                    {
-                        pd.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("USER", 354, (int)size);
-                        //Margins margins = new Margins(100,100,100,100);
-                        // pd.DefaultPageSettings.Margins = margins;
-                        //PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
-                        //printPrvDlg.Document = pd;
-                        //printPrvDlg.ShowDialog();
+                    
+                        if (pd.PrinterSettings.PrinterName.CompareTo(printer_name) == 0)
+                        {
+                            pd.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("USER", 354, (int)size);
+                            //Margins margins = new Margins(100,100,100,100);
+                            // pd.DefaultPageSettings.Margins = margins;
+                            //PrintPreviewDialog printPrvDlg = new PrintPreviewDialog();
+                            //printPrvDlg.Document = pd;
+                            //printPrvDlg.ShowDialog();
 
-                        pd.Print();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Default printer not set to TSC TTP-244 Pro. Please check Devices and Printers.");
-                        break;
-                    }
+                            pd.Print();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Default printer not set to TSC TTP-244 Pro. Please check Devices and Printers.");
+                            break;
+                        }
+                 
                     serial_nos++;
                 }
-                updateSerialNumber();
+                UpdateSerialNumber();
             }
             else
             {
                 MessageBox.Show("Please select Product code or enter count of print");
             }
         }
-        public void saveData()
+        public void SaveData()
         {
             try
             {
                 //comboBox1.Text
-                String query = "select * from mahindra_barcode WHERE `product_code`='" + prod_text.Text + "' and `vendor_code`='" + comboBox2.Text + "'";
+                String query = "select * from mahindra_barcode WHERE `product_id`='" + prod_text.Text + "' and `vendor_code`='" + vend_code.Text + "'";
                 adapter = new OleDbDataAdapter(query, connection);
                 ds = new DataSet();//student-> table name in stud.accdb file
                 adapter.Fill(ds, "mahindra_barcode");
@@ -167,17 +228,21 @@ namespace TableLayoutPanelSample
 
             }
         }
-        public void updateSerialNumber()
+        public void UpdateSerialNumber()
         {
             connection.Open();
             OleDbCommand command = new OleDbCommand();
             command.Connection = connection;
+            if (serial_nos > 999999)
+            {
+                serial_nos = 1;
+            }
 
-            command.CommandText = "Update print_setting set `serial_number`='" + serial_nos + "'";
+            command.CommandText = "Update serial_nos set `current_serial_nos`='" + serial_nos + "'";
             command.ExecuteNonQuery();
             connection.Close();
         }
-        public String getBarcodeString()
+        public String GetBarcodeString(String Shift_strng)
         {
             String barcode_string = "";
 
@@ -185,24 +250,23 @@ namespace TableLayoutPanelSample
 
             if (bar_product)
             {
-                barcode_string = barcode_string + "" + prod_text.Text.ToString();
+                barcode_string = barcode_string + "" + prod_text.Text.ToString()+":";
             }
-            if (bar_rev_level)
-            {
-                barcode_string = barcode_string + "" + textBox3.Text.ToString();
-            }
+            barcode_string = barcode_string + "" + mm_partcode.Text.ToString()+":";
             if (bar_vendor)
             {
-                barcode_string = barcode_string + "" + comboBox2.Text.ToString();
+                barcode_string = barcode_string + "" + vend_code.Text.ToString()+":";
             }
-
-           
-
             if (bar_date)
             {
-                barcode_string = barcode_string + "" + theDate.ToString(datefmt);
+                barcode_string = barcode_string + "" + theDate.ToString(datefmt)+":";
 
             }
+            //if (bar_rev_level)
+           // {
+                barcode_string = barcode_string + "" + Shift_strng + ":";
+          //  }
+            
             if (bar_serial)
             {
                 barcode_string = barcode_string + "" + serial_nos.ToString().PadLeft(6, '0');
@@ -228,13 +292,13 @@ namespace TableLayoutPanelSample
             //string leakage = comboBox2.Text;
             string date_st = theDate.ToString(datefmt);
             String displaydate = theDate.ToString(display_date_fmt);
-           
+            String shift = getShift();
             MessagingToolkit.QRCode.Codec.QRCodeEncoder encoder = new MessagingToolkit.QRCode.Codec.QRCodeEncoder();
             encoder.QRCodeScale = 8;
-            Bitmap btmp = encoder.Encode(getBarcodeString());
+            Bitmap btmp = encoder.Encode(GetBarcodeString(shift));
 
             graphic.DrawImage(btmp, startX +20, startY, 70, 70);
-            graphic.DrawImage(btmp, startX + 255, startY, 70, 70);
+            //graphic.DrawImage(btmp, startX + 255, startY, 70, 70);
             startX = startX + 95;
             if (display_product)
             {
@@ -243,53 +307,72 @@ namespace TableLayoutPanelSample
                 // string top = "Item Name".PadRight(30) + "Price";
                 offset = offset + (int)fontHeight + 1;
             }
-            if (display_rev_level)
+            graphic.DrawString(mm_partcode.Text.ToString()+" "+ tb_other_code.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + (int)fontHeight + 1;
+            /*if (display_rev_level)
             {
-                graphic.DrawString(textBox3.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
+                graphic.DrawString(tb_rev_no.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
                 offset = offset + (int)fontHeight + 1;
-            }
-            if (display_vendor)
-            {
-                graphic.DrawString(comboBox2.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
-                offset = offset + (int)fontHeight + 1;
-            }
-            if (bar_date && display_serial)
-            {
-                graphic.DrawString(date_st + "" + serial_nos.ToString().PadLeft(6, '0'), font, new SolidBrush(Color.Black), startX, startY + offset);
-                offset = offset + (int)fontHeight + 1;
-            }
-            else if (display_serial)
-            {
-                graphic.DrawString(serial_nos.ToString().PadLeft(6, '0'), font, new SolidBrush(Color.Black), startX, startY + offset);
-                offset = offset + (int)fontHeight + 1;
-            }
-            else if (bar_date)
-            {
-                graphic.DrawString(date_st, font, new SolidBrush(Color.Black), startX, startY + offset);
-                offset = offset + (int)fontHeight + 1;
-            }
+            }*/
             if (display_descripton)
             {
-                graphic.DrawString(textBox1.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
-                offset = offset + (int)fontHeight + 1;
+                graphic.DrawString(tb_part_desc.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
+                offset = offset + (int)fontHeight + 1+ offset;
             }
-            if (display_vailp_rev)
+            
+             if (bar_date)
             {
-                graphic.DrawString(textBox4.Text.ToString().PadRight(10,' ') +" "+theDate.ToString("ddMMyy hh:mm tt"), font, new SolidBrush(Color.Black), startX, startY + offset);
+                graphic.DrawString(displaydate + " - "+shift, font, new SolidBrush(Color.Black), startX, startY + offset);
                 offset = offset + (int)fontHeight + 1;
             }
+            graphic.DrawString(serial_nos.ToString() , font, new SolidBrush(Color.Black), startX, startY + offset);
+            offset = offset + (int)fontHeight + 1;
+            /* if (display_descripton)
+             {
+                 graphic.DrawString(vend_code.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
+                 offset = offset + (int)fontHeight + 1;
+             }*/
+            /* if (display_vailp_rev)
+             {
+                 graphic.DrawString(tb_part_desc.Text.ToString().PadRight(10,' ') +" "+theDate.ToString("ddMMyy hh:mm tt"), font, new SolidBrush(Color.Black), startX, startY + offset);
+                 offset = offset + (int)fontHeight + 1;
+             }*/
 
-           
-          //  String query = "Insert into report(`barcode`,`serial_number`,`product_code`,`date_entry`,`time_entry`,`vendor_code`,`dt`,`count`,`descrip`) values('" +
-             //   getBarcodeString() + "','" + serial_nos + "','" + comboBox1.Text.ToString() + "','" + theDate.ToString("dd/MM/yyyy") + "','" +
-               // theDate.ToString("hh:mm:ss tt") + "','" + comboBox2.Text.ToString() + "','" + theDate.ToString("yyyy-MM-dd") + "','" + textBox2.Text + "','" + textBox1.Text + "')";
+
+            //  String query = "Insert into report(`barcode`,`serial_number`,`product_code`,`date_entry`,`time_entry`,`vendor_code`,`dt`,`count`,`descrip`) values('" +
+            //   getBarcodeString() + "','" + serial_nos + "','" + comboBox1.Text.ToString() + "','" + theDate.ToString("dd/MM/yyyy") + "','" +
+            // theDate.ToString("hh:mm:ss tt") + "','" + comboBox2.Text.ToString() + "','" + theDate.ToString("yyyy-MM-dd") + "','" + textBox2.Text + "','" + textBox1.Text + "')";
             //if (preview_bool)
-               // insertToDb(query);
+            // insertToDb(query);
+
+        }
+        public string getShift()
+        {
+            DateTime now = DateTime.Now;
+            TimeSpan currentTime = now.TimeOfDay;
+
+            
+
+            if (currentTime >= shift1Start && currentTime < shift1End)
+            {
+                return "01";
+            }
+            else if (currentTime >= shift2Start && currentTime < shift2End)
+            {
+                return "02";
+            }
+            else
+            {
+                // Covers times from 11 PM to 7 AM (crosses midnight)
+                return "03";
+            }
 
         }
         public void refreshForm()
         {
             setAutocomplete();
+            setShiftTiming();
+            setSerialNumber();
         }
         private void insertToDb(string query,bool load_req=true)
         {
@@ -325,7 +408,7 @@ namespace TableLayoutPanelSample
             adapter.Fill(dt);
             foreach (DataRow dataRow in dt.Rows)
             {
-                product_code_list.Add(dataRow.Field<String>("product_code"));
+                product_code_list.Add(dataRow.Field<String>("product_id"));
                 vendor_code.Add(dataRow.Field<String>("vendor_code"));
             }
             comboBox1.Items.AddRange(product_code_list.ToArray<String>());
@@ -361,15 +444,15 @@ namespace TableLayoutPanelSample
 
                 bar_rev_level = getValueOf(dataRow.Field<Int32>("bar_rev_level"));
                 display_rev_level = getValueOf(dataRow.Field<Int32>("display_rev_level"));
-                display_vailp_rev = getValueOf(dataRow.Field<Int32>("display_vaipl"));
+                display_shift = getValueOf(dataRow.Field<Int32>("disp_shift"));
 
                 switch (dataRow.Field<Int32>("date_format"))
                 {
                     case 1:
-                        datefmt = "MMyy";
+                        datefmt = "ddMMyy";
                         break;
                     case 2:
-                        datefmt = "ddMMyy";
+                        datefmt = "MM/yy";
                         break;
                     case 3:
                         datefmt = "ddMMyyHHmm";
@@ -379,7 +462,7 @@ namespace TableLayoutPanelSample
                 switch (dataRow.Field<Int32>("dis_date_frmt"))
                 {
                     case 1:
-                        display_date_fmt = "MMyy";
+                        display_date_fmt = "dd-MM-yy";
                         break;
                     case 2:
                         display_date_fmt = "MM/yy";
@@ -389,15 +472,16 @@ namespace TableLayoutPanelSample
                         break;
 
                 }
-                DateTime dat = DateTime.Now;
-                int mon = Int32.Parse(dat.ToString("MM"));
-                if (mon.Equals(dataRow.Field<Int32>("cur_month")))
-                    serial_nos = dataRow.Field<Int32>("serial_number");
-                else
-                {
-                    serial_nos = 1;
-                    resetSerialNumber(mon);
-                }
+                /* DateTime dat = DateTime.Now;
+                 int mon = Int32.Parse(dat.ToString("MM"));
+                 if (mon.Equals(dataRow.Field<Int32>("cur_month")))
+                     serial_nos = dataRow.Field<Int32>("serial_number");
+                 else
+                 {
+                     serial_nos = 1;
+                     resetSerialNumber(mon);
+                 }*/
+                printer_name = dataRow.Field<String>("printer_name");
             }
         }
 
@@ -421,7 +505,7 @@ namespace TableLayoutPanelSample
         public void ApplyoperatorData()
         {
             error_label.Text = "";
-            adapter = new OleDbDataAdapter("Select * from mahindra_barcode WHERE `product_code`='" + prod_text.Text + "'", connection);
+            adapter = new OleDbDataAdapter("Select * from mahindra_barcode WHERE `product_id`='" + prod_text.Text + "'", connection);
 
             dt = new DataTable();//student-> table name in stud.accdb file
             adapter.Fill(dt);
@@ -430,11 +514,12 @@ namespace TableLayoutPanelSample
             {
                 foreach (DataRow dataRow in dt.Rows)
                 {
-                    comboBox2.Text = dataRow.Field<String>("mm_code");
-                    textBox1.Text = dataRow.Field<String>("vendor_code");
-                   // textBox3.Text = dataRow.Field<String>("cust_rev");
-                  //  textBox4.Text = dataRow.Field<String>("vaipl_part");
-                    prod_text.Text = dataRow.Field<String>("product_code");
+                    mm_partcode.Text = dataRow.Field<String>("mm_part_code");
+                    vend_code.Text = dataRow.Field<String>("vendor_code");
+                    tb_part_desc.Text = dataRow.Field<String>("part_desc");
+                   tb_rev_no.Text = dataRow.Field<String>("cust_rev");
+                    prod_text.Text = dataRow.Field<String>("product_id");
+                    tb_other_code.Text = dataRow.Field<String>("oth");
                 }
                 textBox2.Focus();
             }
@@ -449,7 +534,7 @@ namespace TableLayoutPanelSample
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            adapter = new OleDbDataAdapter("Select * from mahindra_barcode WHERE `product_code`='" + comboBox1.Text + "'", connection);
+            adapter = new OleDbDataAdapter("Select * from mahindra_barcode WHERE `product_id`='" + comboBox1.Text + "'", connection);
 
             dt = new DataTable();//student-> table name in stud.accdb file
             adapter.Fill(dt);
@@ -457,9 +542,9 @@ namespace TableLayoutPanelSample
             {
                 comboBox2.Text = dataRow.Field<String>("mm_code");
                // textBox1.Text = dataRow.Field<String>("descrip");
-                textBox3.Text = dataRow.Field<String>("vendor_code");
+                tb_rev_no.Text = dataRow.Field<String>("vendor_code");
                // textBox4.Text = dataRow.Field<String>("vaipl_part");
-                prod_text.Text = dataRow.Field<String>("product_code");
+                prod_text.Text = dataRow.Field<String>("product_id");
             }
             textBox2.Focus();
         }
@@ -490,6 +575,7 @@ namespace TableLayoutPanelSample
         {
             //comboBox1.Focus();
             prod_text.Focus();
+            timer2.Start();
         }
 
         private void tblPnlDataEntry_Paint(object sender, PaintEventArgs e)
@@ -614,6 +700,23 @@ namespace TableLayoutPanelSample
 
         }
 
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            String cur_shift = getShift();
+            switch (cur_shift)
+            {
+                case "01":
+                    shift_info.Text = "Shift 1";
+                    break;
+                case "02":
+                    shift_info.Text = "Shift 2";
+                    break;
+                case "03":
+                    shift_info.Text = "Shift 3";
+                    break;
+            }
+        }
+
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -654,9 +757,9 @@ namespace TableLayoutPanelSample
             comboBox1.Text = "";
             prod_text.Text = "";
             comboBox2.Text = "";
-            textBox1.Text = "";
-            textBox4.Text = "";
-            textBox3.Text = "";
+            vend_code.Text = "";
+            tb_part_desc.Text = "";
+            tb_rev_no.Text = "";
             prod_text.Focus();
         }
 
