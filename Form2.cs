@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ZXing;
+using ZXing.Common;
 
 namespace TableLayoutPanelSample
 {
@@ -145,7 +147,7 @@ namespace TableLayoutPanelSample
             PrintDocument pd = new PrintDocument();
             //Add PrintPage event handler
             //comboBox1.Text.ToString().Equals("")
-            if (!prod_text.Text.ToString().Equals("") && !textBox2.Text.ToString().Equals("0"))
+            if (!mm_partcode.Text.ToString().Equals("") && !textBox2.Text.ToString().Equals("0"))
             {
                 pd.PrintPage += new PrintPageEventHandler(CreateBarcodeSticker);
                 for (int i = 0; i < Int32.Parse(textBox2.Text.ToString()); i++)
@@ -194,7 +196,7 @@ namespace TableLayoutPanelSample
             try
             {
                 //comboBox1.Text
-                String query = "select * from mahindra_barcode WHERE `product_id`='" + prod_text.Text + "' and `vendor_code`='" + vend_code.Text + "'";
+                String query = "select * from mahindra_barcode WHERE `mm_part_code`='" + mm_partcode.Text + "' and `vendor_code`='" + vend_code.Text + "'";
                 adapter = new OleDbDataAdapter(query, connection);
                 ds = new DataSet();//student-> table name in stud.accdb file
                 adapter.Fill(ds, "mahindra_barcode");
@@ -269,7 +271,7 @@ namespace TableLayoutPanelSample
             
             if (bar_serial)
             {
-                barcode_string = barcode_string + "" + serial_nos.ToString().PadLeft(6, '0');
+                barcode_string = barcode_string + "" + serial_nos.ToString().PadLeft(7, '0');
             }
          
             return barcode_string;
@@ -288,18 +290,34 @@ namespace TableLayoutPanelSample
             theDate = DateTime.Now;
 
             //comboBox1.Text;
-            string part_num = prod_text.Text;
+            string part_num = mm_partcode.Text;
             //string leakage = comboBox2.Text;
             string date_st = theDate.ToString(datefmt);
             String displaydate = theDate.ToString(display_date_fmt);
             String shift = getShift();
-            MessagingToolkit.QRCode.Codec.QRCodeEncoder encoder = new MessagingToolkit.QRCode.Codec.QRCodeEncoder();
+           /* MessagingToolkit.QRCode.Codec.QRCodeEncoder encoder = new MessagingToolkit.QRCode.Codec.QRCodeEncoder();
             encoder.QRCodeScale = 8;
             Bitmap btmp = encoder.Encode(GetBarcodeString(shift));
+*/
+            
+            var data = GetBarcodeString(shift);
+            var writer = new BarcodeWriter
+            {
+                Format = BarcodeFormat.DATA_MATRIX,
+                Options = new EncodingOptions
+                {
+                    Height = 80,
+                    Width = 80,
+                    Margin = 0
+                }
+            };
 
-            graphic.DrawImage(btmp, startX +20, startY, 70, 70);
-            //graphic.DrawImage(btmp, startX + 255, startY, 70, 70);
-            startX = startX + 95;
+            Bitmap btmp = writer.Write(data);
+
+            graphic.DrawImage(btmp, startX + 5, startY, 90, 90);
+            graphic.DrawImage(btmp, startX + 255, startY, 90, 90);
+
+            startX = startX + 90;
             if (display_product)
             {
                 //comboBox1.Text
@@ -316,8 +334,28 @@ namespace TableLayoutPanelSample
             }*/
             if (display_descripton)
             {
-                graphic.DrawString(tb_part_desc.Text.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
-                offset = offset + (int)fontHeight + 1+ offset;
+                var chunks = SplitStringPreserveWords(tb_part_desc.Text.ToString());
+                int string_count = 0;
+                foreach (var chunk in chunks)
+                {
+                    string_count++;
+                    graphic.DrawString(chunk, font, new SolidBrush(Color.Black), startX, startY + offset);
+                    offset = offset + (int)fontHeight + 1;
+                    if (string_count == 2)
+                    {
+                        break;
+                    }
+                }
+                if(string_count == 1)
+                {
+                    offset = offset + (int)fontHeight;
+                }
+                else
+                {
+                    offset = offset + (int)fontHeight ;
+                }
+               
+
             }
             
              if (bar_date)
@@ -325,7 +363,7 @@ namespace TableLayoutPanelSample
                 graphic.DrawString(displaydate + " - "+shift, font, new SolidBrush(Color.Black), startX, startY + offset);
                 offset = offset + (int)fontHeight + 1;
             }
-            graphic.DrawString(serial_nos.ToString() , font, new SolidBrush(Color.Black), startX, startY + offset);
+            graphic.DrawString(serial_nos.ToString().PadLeft(7,'0') , font, new SolidBrush(Color.Black), startX, startY + offset);
             offset = offset + (int)fontHeight + 1;
             /* if (display_descripton)
              {
@@ -346,6 +384,53 @@ namespace TableLayoutPanelSample
             // insertToDb(query);
 
         }
+
+        public static List<string> SplitStringPreserveWords(string text, int chunkSize = 28)
+        {
+            List<string> result = new List<string>();
+
+            int i = 0;
+            while (i < text.Length)
+            {
+                // Look ahead max to chunkSize
+                int length = Math.Min(chunkSize, text.Length - i);
+                string part = text.Substring(i, length);
+
+                // If end of text or part ends at whitespace or next char is whitespace
+                if (i + length >= text.Length || char.IsWhiteSpace(text[i + length]))
+                {
+                    result.Add(part.TrimEnd());
+                    i += length;
+                }
+                else
+                {
+                    // Try to break at last space in the chunk
+                    int lastSpace = part.LastIndexOf(' ');
+                    if (lastSpace > 0)
+                    {
+                        result.Add(part.Substring(0, lastSpace));
+                        i += lastSpace + 1; // Skip the space
+                    }
+                    else
+                    {
+                        // Force break with hyphen
+                        if (length == chunkSize)
+                        {
+                            result.Add(part.Substring(0, chunkSize - 1) + "-");
+                            i += chunkSize - 1;
+                        }
+                        else
+                        {
+                            result.Add(part);
+                            i += length;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public string getShift()
         {
             DateTime now = DateTime.Now;
@@ -505,7 +590,7 @@ namespace TableLayoutPanelSample
         public void ApplyoperatorData()
         {
             error_label.Text = "";
-            adapter = new OleDbDataAdapter("Select * from mahindra_barcode WHERE `product_id`='" + prod_text.Text + "'", connection);
+            adapter = new OleDbDataAdapter("Select * from mahindra_barcode WHERE `mm_part_code`='" + mm_partcode.Text + "'", connection);
 
             dt = new DataTable();//student-> table name in stud.accdb file
             adapter.Fill(dt);
@@ -514,11 +599,11 @@ namespace TableLayoutPanelSample
             {
                 foreach (DataRow dataRow in dt.Rows)
                 {
-                    mm_partcode.Text = dataRow.Field<String>("mm_part_code");
+                    prod_text.Text = dataRow.Field<String>("product_id"); //mm_part_code
                     vend_code.Text = dataRow.Field<String>("vendor_code");
                     tb_part_desc.Text = dataRow.Field<String>("part_desc");
-                   tb_rev_no.Text = dataRow.Field<String>("cust_rev");
-                    prod_text.Text = dataRow.Field<String>("product_id");
+                  // tb_rev_no.Text = dataRow.Field<String>("cust_rev");
+                    mm_partcode.Text = dataRow.Field<String>("mm_part_code");  //product_id
                     tb_other_code.Text = dataRow.Field<String>("oth");
                 }
                 textBox2.Focus();
@@ -526,7 +611,7 @@ namespace TableLayoutPanelSample
             else
             {
                 error_label.Text ="Please Enter valid product code. Product code does not match exist with records in system please contact Administration.";
-                prod_text.Focus();
+                mm_partcode.Focus();
                 //MessageBox.Show("Please Enter valid product code. Product code does not match exist with records in system please contact Administration.");
                  
             }
@@ -542,9 +627,9 @@ namespace TableLayoutPanelSample
             {
                 comboBox2.Text = dataRow.Field<String>("mm_code");
                // textBox1.Text = dataRow.Field<String>("descrip");
-                tb_rev_no.Text = dataRow.Field<String>("vendor_code");
+             //   tb_rev_no.Text = dataRow.Field<String>("vendor_code");
                // textBox4.Text = dataRow.Field<String>("vaipl_part");
-                prod_text.Text = dataRow.Field<String>("product_id");
+                mm_partcode.Text = dataRow.Field<String>("product_id");
             }
             textBox2.Focus();
         }
@@ -574,7 +659,7 @@ namespace TableLayoutPanelSample
         private void Form2_Load(object sender, EventArgs e)
         {
             //comboBox1.Focus();
-            prod_text.Focus();
+            mm_partcode.Focus();
             timer2.Start();
         }
 
@@ -620,7 +705,7 @@ namespace TableLayoutPanelSample
             PrintDocument pd = new PrintDocument();
             //Add PrintPage event handler
             //comboBox1.Text.ToString().Equals("")
-            if (!prod_text.Text.ToString().Equals("") && !textBox2.Text.ToString().Equals("0"))
+            if (!mm_partcode.Text.ToString().Equals("") && !textBox2.Text.ToString().Equals("0"))
             {
                 pd.PrintPage += new PrintPageEventHandler(CreateBarcodeSticker);
                 for (int i = 0; i <1; i++)
@@ -755,12 +840,13 @@ namespace TableLayoutPanelSample
         private void xButton3_Click(object sender, EventArgs e)
         {
             comboBox1.Text = "";
-            prod_text.Text = "";
+            mm_partcode.Text = "";
             comboBox2.Text = "";
             vend_code.Text = "";
             tb_part_desc.Text = "";
-            tb_rev_no.Text = "";
-            prod_text.Focus();
+          //  tb_rev_no.Text = "";
+            mm_partcode.Focus();
+            tb_other_code.Text = "";
         }
 
         private void prod_text_Enter(object sender, EventArgs e)
@@ -810,6 +896,10 @@ namespace TableLayoutPanelSample
             //{
                // ApplyoperatorData();
             //}
+            if(e.KeyCode == Keys.Enter)
+            {
+                xButton4.PerformClick();
+            }
         }
 
         private void prod_text_KeyPress(object sender, KeyPressEventArgs e)

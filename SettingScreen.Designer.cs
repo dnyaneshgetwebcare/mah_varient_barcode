@@ -33,6 +33,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.bar_cust_rev = new System.Windows.Forms.CheckBox();
             this.barcode_shift = new System.Windows.Forms.CheckBox();
             this.bar_part_id = new System.Windows.Forms.CheckBox();
             this.bar_productcode = new System.Windows.Forms.CheckBox();
@@ -49,6 +50,7 @@
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.disp_cust_rev = new System.Windows.Forms.CheckBox();
             this.dis_shift = new System.Windows.Forms.CheckBox();
             this.disp_part_id = new System.Windows.Forms.CheckBox();
             this.disp_desc = new System.Windows.Forms.CheckBox();
@@ -78,8 +80,6 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.disp_cust_rev = new System.Windows.Forms.CheckBox();
-            this.bar_cust_rev = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -189,6 +189,20 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(165, 208);
             this.tableLayoutPanel4.TabIndex = 0;
+            // 
+            // bar_cust_rev
+            // 
+            this.bar_cust_rev.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.bar_cust_rev.AutoSize = true;
+            this.bar_cust_rev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bar_cust_rev.Location = new System.Drawing.Point(30, 181);
+            this.bar_cust_rev.Margin = new System.Windows.Forms.Padding(30, 3, 3, 3);
+            this.bar_cust_rev.Name = "bar_cust_rev";
+            this.bar_cust_rev.Size = new System.Drawing.Size(87, 20);
+            this.bar_cust_rev.TabIndex = 7;
+            this.bar_cust_rev.Text = "Cust. Rev.";
+            this.bar_cust_rev.UseVisualStyleBackColor = true;
+            this.bar_cust_rev.Visible = false;
             // 
             // barcode_shift
             // 
@@ -412,6 +426,20 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(165, 186);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // disp_cust_rev
+            // 
+            this.disp_cust_rev.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.disp_cust_rev.AutoSize = true;
+            this.disp_cust_rev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.disp_cust_rev.Location = new System.Drawing.Point(30, 164);
+            this.disp_cust_rev.Margin = new System.Windows.Forms.Padding(30, 3, 3, 3);
+            this.disp_cust_rev.Name = "disp_cust_rev";
+            this.disp_cust_rev.Size = new System.Drawing.Size(87, 19);
+            this.disp_cust_rev.TabIndex = 8;
+            this.disp_cust_rev.Text = "Cust. Rev.";
+            this.disp_cust_rev.UseVisualStyleBackColor = true;
+            this.disp_cust_rev.Visible = false;
             // 
             // dis_shift
             // 
@@ -796,32 +824,6 @@
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.xButton1_Click);
-            // 
-            // disp_cust_rev
-            // 
-            this.disp_cust_rev.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.disp_cust_rev.AutoSize = true;
-            this.disp_cust_rev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.disp_cust_rev.Location = new System.Drawing.Point(30, 164);
-            this.disp_cust_rev.Margin = new System.Windows.Forms.Padding(30, 3, 3, 3);
-            this.disp_cust_rev.Name = "disp_cust_rev";
-            this.disp_cust_rev.Size = new System.Drawing.Size(87, 19);
-            this.disp_cust_rev.TabIndex = 8;
-            this.disp_cust_rev.Text = "Cust. Rev.";
-            this.disp_cust_rev.UseVisualStyleBackColor = true;
-            // 
-            // bar_cust_rev
-            // 
-            this.bar_cust_rev.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.bar_cust_rev.AutoSize = true;
-            this.bar_cust_rev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bar_cust_rev.Location = new System.Drawing.Point(30, 181);
-            this.bar_cust_rev.Margin = new System.Windows.Forms.Padding(30, 3, 3, 3);
-            this.bar_cust_rev.Name = "bar_cust_rev";
-            this.bar_cust_rev.Size = new System.Drawing.Size(87, 20);
-            this.bar_cust_rev.TabIndex = 7;
-            this.bar_cust_rev.Text = "Cust. Rev.";
-            this.bar_cust_rev.UseVisualStyleBackColor = true;
             // 
             // SettingScreen
             // 
